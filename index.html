@@ -122,6 +122,8 @@
   .after-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .after-grid .demo-card img { aspect-ratio: 9/16; }
   .after-grid .demo-card video { width: 100%; display: block; aspect-ratio: 9/16; object-fit: cover; background: #000; }
+  .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.35); cursor: pointer; z-index: 2; }
+  .play-overlay .btn-circle { width: 56px; height: 56px; border-radius: 50%; background: rgba(37,244,165,0.92); color: #04140d; display: grid; place-items: center; font-size: 22px; padding-left: 4px; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
   .play-badge {
     position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.6); color: #fff;
     font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
@@ -254,17 +256,17 @@
       <div class="after-grid">
         <div class="demo-card rel">
           <span class="play-badge">▶ 0:06</span>
-          <video src="demo/ad_serum_luxury.mp4" poster="demo/product_serum.jpg" autoplay muted loop playsinline></video>
+          <video src="demo/ad_serum_luxury.mp4" poster="demo/product_serum.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="auto"></video>
           <div class="cap">Skincare · "Luxury spa"</div>
         </div>
         <div class="demo-card rel">
           <span class="play-badge">▶ 0:06</span>
-          <video src="demo/ad_sneaker_street.mp4" poster="demo/product_sneaker.jpg" autoplay muted loop playsinline></video>
+          <video src="demo/ad_sneaker_street.mp4" poster="demo/product_sneaker.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="auto"></video>
           <div class="cap">Sneaker · "Street energy"</div>
         </div>
         <div class="demo-card rel">
           <span class="play-badge">▶ 0:06</span>
-          <video src="demo/ad_blender_ugc.mp4" poster="demo/product_blender.jpg" autoplay muted loop playsinline></video>
+          <video src="demo/ad_blender_ugc.mp4" poster="demo/product_blender.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="auto"></video>
           <div class="cap">Kitchen gadget · "UGC kitchen"</div>
         </div>
       </div>
@@ -422,8 +424,28 @@ document.querySelectorAll("[data-waitlist]").forEach(function (form) {
 document.querySelectorAll("video[autoplay]").forEach(function (v) {
   v.muted = true;
   v.defaultMuted = true;
-  var start = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+
+  // 自动播放被拒时，显示播放按钮（用户手势点击必定可播，微信兜底方案）
+  function showPlayOverlay() {
+    if (v.dataset.overlay) return;
+    v.dataset.overlay = "1";
+    var ov = document.createElement("div");
+    ov.className = "play-overlay";
+    ov.innerHTML = '<div class="btn-circle">▶</div>';
+    ov.addEventListener("click", function (e) {
+      e.stopPropagation();
+      v.play();
+      ov.remove();
+    });
+    v.parentElement.appendChild(ov);
+  }
+
+  var start = function () {
+    var p = v.play();
+    if (p && p.catch) p.catch(showPlayOverlay);
+  };
   start();
+
   // 进入视口时再补一次（应对后台标签页加载被暂停的情况）
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (entries, obs) {
@@ -432,6 +454,13 @@ document.querySelectorAll("video[autoplay]").forEach(function (v) {
       });
     }, { threshold: 0.2 }).observe(v);
   }
+
+  // 微信内置浏览器：JSBridge 就绪后再触发一次
+  document.addEventListener("WeixinJSBridgeReady", function () {
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  }, false);
+
   v.addEventListener("click", start); // 兜底：点击视频恢复播放
 });
 </script>
