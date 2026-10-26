@@ -256,17 +256,17 @@
       <div class="after-grid">
         <div class="demo-card rel">
           <span class="play-badge">▶ 0:06</span>
-          <video src="demo/ad_serum_luxury.mp4" poster="demo/product_serum.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="auto"></video>
+          <video src="demo/ad_serum_luxury.mp4" poster="demo/product_serum.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="metadata"></video>
           <div class="cap">Skincare · "Luxury spa"</div>
         </div>
         <div class="demo-card rel">
           <span class="play-badge">▶ 0:06</span>
-          <video src="demo/ad_sneaker_street.mp4" poster="demo/product_sneaker.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="auto"></video>
+          <video src="demo/ad_sneaker_street.mp4" poster="demo/product_sneaker.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="metadata"></video>
           <div class="cap">Sneaker · "Street energy"</div>
         </div>
         <div class="demo-card rel">
           <span class="play-badge">▶ 0:06</span>
-          <video src="demo/ad_blender_ugc.mp4" poster="demo/product_blender.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="auto"></video>
+          <video src="demo/ad_blender_ugc.mp4" poster="demo/product_blender.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="metadata"></video>
           <div class="cap">Kitchen gadget · "UGC kitchen"</div>
         </div>
       </div>
@@ -444,15 +444,16 @@ document.querySelectorAll("video[autoplay]").forEach(function (v) {
     var p = v.play();
     if (p && p.catch) p.catch(showPlayOverlay);
   };
-  start();
 
-  // 进入视口时再补一次（应对后台标签页加载被暂停的情况）
+  // 进入视口才开始加载和播放（避免页面打开时 3 个视频抢带宽）
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (entries, obs) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { start(); obs.disconnect(); }
       });
     }, { threshold: 0.2 }).observe(v);
+  } else {
+    start();
   }
 
   // 微信内置浏览器：JSBridge 就绪后再触发一次
