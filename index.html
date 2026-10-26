@@ -255,17 +255,14 @@
       <div class="demo-arrow">→</div>
       <div class="after-grid">
         <div class="demo-card rel">
-          <span class="play-badge">▶ 0:06</span>
           <video src="demo/ad_serum_luxury.mp4" poster="demo/product_serum.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="metadata"></video>
           <div class="cap">Skincare · "Luxury spa"</div>
         </div>
         <div class="demo-card rel">
-          <span class="play-badge">▶ 0:06</span>
           <video src="demo/ad_sneaker_street.mp4" poster="demo/product_sneaker.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="metadata"></video>
           <div class="cap">Sneaker · "Street energy"</div>
         </div>
         <div class="demo-card rel">
-          <span class="play-badge">▶ 0:06</span>
           <video src="demo/ad_blender_ugc.mp4" poster="demo/product_blender.jpg" autoplay muted loop playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen preload="metadata"></video>
           <div class="cap">Kitchen gadget · "UGC kitchen"</div>
         </div>
@@ -425,20 +422,24 @@ document.querySelectorAll("video[autoplay]").forEach(function (v) {
   v.muted = true;
   v.defaultMuted = true;
 
-  // 自动播放被拒时，显示播放按钮（用户手势点击必定可播，微信兜底方案）
+  // 自动播放被拒且确实没播起来时，才显示播放按钮；一旦开始播放立即隐藏
+  var overlay = null;
+  function hideOverlay() {
+    if (overlay) { overlay.remove(); overlay = null; }
+  }
   function showPlayOverlay() {
-    if (v.dataset.overlay) return;
-    v.dataset.overlay = "1";
-    var ov = document.createElement("div");
-    ov.className = "play-overlay";
-    ov.innerHTML = '<div class="btn-circle">▶</div>';
-    ov.addEventListener("click", function (e) {
+    if (overlay || !v.paused) return;
+    overlay = document.createElement("div");
+    overlay.className = "play-overlay";
+    overlay.innerHTML = '<div class="btn-circle">▶</div>';
+    overlay.addEventListener("click", function (e) {
       e.stopPropagation();
       v.play();
-      ov.remove();
+      hideOverlay();
     });
-    v.parentElement.appendChild(ov);
+    v.parentElement.appendChild(overlay);
   }
+  v.addEventListener("playing", hideOverlay); // 任何路径播放成功都清掉按钮
 
   var start = function () {
     var p = v.play();
