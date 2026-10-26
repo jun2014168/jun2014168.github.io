@@ -414,6 +414,26 @@ document.querySelectorAll("[data-waitlist]").forEach(function (form) {
     }
   });
 });
+
+// ── Fix: force autoplay ───────────────────────────────────────────────
+// 部分浏览器（Chrome/Safari）的自动播放策略检查 JS 属性 video.muted，
+// 而 HTML 的 muted 属性不会可靠同步过去，导致自动播放被拦截停在封面图。
+// 这里显式设置 muted 并调用 play()，失败时静默降级为点击播放。
+document.querySelectorAll("video[autoplay]").forEach(function (v) {
+  v.muted = true;
+  v.defaultMuted = true;
+  var start = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+  start();
+  // 进入视口时再补一次（应对后台标签页加载被暂停的情况）
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { start(); obs.disconnect(); }
+      });
+    }, { threshold: 0.2 }).observe(v);
+  }
+  v.addEventListener("click", start); // 兜底：点击视频恢复播放
+});
 </script>
 
 </body>
