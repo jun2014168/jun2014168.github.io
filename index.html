@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReelPilot — Turn Product Photos into TikTok Ads in 10 Minutes</title>
-<meta name="description" content="Upload your product photos, get 10 ready-to-post TikTok ad videos. Built for TikTok Shop sellers and DTC brands.">
+<title>ReelPilot — TikTok Shop-Ready Product Videos from Your Photos</title>
+<meta name="description" content="Turn your product photos and detail page into TikTok Shop-ready videos in 10 minutes. Claims match your listing, AI disclosure included, no off-platform links.">
 <style>
   :root {
     --bg: #0a0a0f;
@@ -130,6 +130,16 @@
   }
   .rel { position: relative; }
 
+  /* Compliance */
+  .compliance-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .compliance-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 26px;
+  }
+  .compliance-card .kicker { color: var(--brand); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+  .compliance-card h3 { font-size: 17px; margin-bottom: 8px; }
+  .compliance-card p { color: var(--muted); font-size: 14px; }
+
   /* Pricing */
   .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
   .plan {
@@ -176,6 +186,7 @@
 
   @media (max-width: 860px) {
     .steps, .pricing { grid-template-columns: 1fr; }
+    .compliance-grid { grid-template-columns: 1fr; }
     .demo-grid { grid-template-columns: 1fr; }
     .demo-arrow { transform: rotate(90deg); }
     .float-tag { display: none; }
@@ -192,6 +203,7 @@
     <div class="nav-links">
       <a href="#how">How it works</a>
       <a href="#demo">Demo</a>
+      <a href="#compliance">Compliance</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
       <a href="#cta" class="btn btn-primary btn-sm">Get early access</a>
@@ -201,18 +213,18 @@
 
 <header class="hero">
   <div class="container">
-    <span class="pill">Early access — first 100 members lock 50% off for life</span>
-    <h1>Turn product photos into <span class="grad">10 TikTok ads</span> in 10 minutes</h1>
-    <p class="sub">Upload a photo of your product. ReelPilot generates a batch of scroll-stopping, ready-to-post video ads — hooks, captions, and 9:16 format included. No editor. No studio. No skills.</p>
+    <span class="pill">Built for the Oct 2026 TikTok Shop content rules</span>
+    <h1>Product videos that <span class="grad">pass TikTok Shop review</span> — made from your own photos</h1>
+    <p class="sub">ReelPilot turns one product photo into a batch of 9:16 videos in about 10 minutes. Every script is grounded in your product detail page, every export carries an AI-disclosure note, and nothing ever points buyers off-platform.</p>
     <form class="email-form" data-waitlist>
       <input type="email" name="email" placeholder="you@yourstore.com" required aria-label="Email address">
       <button type="submit" class="btn btn-primary">Join waitlist</button>
     </form>
     <div class="form-note" data-form-note></div>
-    <small>Built for TikTok Shop sellers &amp; DTC brands · <b>Free to join</b>, cancel anytime</small>
+    <small>Built for single-store TikTok Shop sellers · <b>Early access</b>: first 100 lock 50% off for life</small>
 
     <div class="hero-visual">
-      <span class="float-tag a">10 ad variations per batch</span>
+      <span class="float-tag a">Claims match your listing</span>
       <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=smartphone%20mockup%20displaying%20a%20TikTok%20style%20vertical%20video%20ad%20of%20a%20luxury%20skincare%20serum%20bottle%20with%20water%20splash%20effect%2C%20dark%20studio%20background%2C%20glowing%20UI%20interface%2C%20product%20photography%2C%20ultra%20realistic%2C%20premium%20advertising&image_size=portrait_16_9" alt="TikTok-style product video ad on a phone">
       <span class="float-tag b">9:16 ready to post</span>
     </div>
@@ -222,7 +234,7 @@
 <section id="how">
   <div class="container">
     <h2 class="section-title">How it works</h2>
-    <p class="section-sub">Three steps. Zero editing timeline. Your product stays 100% consistent because every video starts from your real photo.</p>
+    <p class="section-sub">Three steps. Zero editing timeline. Every video starts from your real photo — and every claim comes from your own listing.</p>
     <div class="steps">
       <div class="step">
         <div class="num">1</div>
@@ -231,13 +243,13 @@
       </div>
       <div class="step">
         <div class="num">2</div>
-        <h3>Pick a template &amp; hook</h3>
-        <p>Choose from ad templates proven on TikTok: unboxing, problem-solution, UGC-style, trending formats. Add your selling points.</p>
+        <h3>Paste your detail page</h3>
+        <p>Choose a proven format — unboxing, problem-solution, UGC-style. ReelPilot only puts selling points on screen that your listing actually states.</p>
       </div>
       <div class="step">
         <div class="num">3</div>
-        <h3>Download 10 videos</h3>
-        <p>Get a batch of 9:16 videos with captions and hooks in minutes. Post them, test them, scale the winners.</p>
+        <h3>Download the batch</h3>
+        <p>Get 10 ready-to-post 9:16 videos with captions and hooks, plus an AI-disclosure note you can keep on file.</p>
       </div>
     </div>
   </div>
@@ -246,7 +258,7 @@
 <section id="demo" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="container">
     <h2 class="section-title">From one photo to a week of content</h2>
-    <p class="section-sub">Real outputs — three products, three ad styles, each generated from one plain product photo.</p>
+    <p class="section-sub">Real outputs — three products, three styles, each generated from one plain product photo. All samples are AI-generated.</p>
     <div class="demo-grid">
       <div class="demo-card">
         <img src="demo/product_serum.jpg" alt="Original plain product photo">
@@ -271,10 +283,39 @@
   </div>
 </section>
 
+<section id="compliance">
+  <div class="container">
+    <h2 class="section-title">Built around the rules sellers keep getting banned by</h2>
+    <p class="section-sub">TikTok Shop's October 2026 updates tightened claims, AI content, and off-platform links. ReelPilot bakes those limits into the output instead of leaving them to you.</p>
+    <div class="compliance-grid">
+      <div class="compliance-card">
+        <div class="kicker">No invented benefits</div>
+        <h3>Claims come from your listing</h3>
+        <p>Paste your product detail page. If a benefit, material, or compatibility isn't stated there, ReelPilot won't put it on screen or in the caption.</p>
+      </div>
+      <div class="compliance-card">
+        <div class="kicker">Disclosure included</div>
+        <h3>AI label, not an afterthought</h3>
+        <p>Every export ships with an AI-generated content note, so your posts carry the disclosure TikTok Shop expects instead of getting flagged after publishing.</p>
+      </div>
+      <div class="compliance-card">
+        <div class="kicker">Zero off-platform diversion</div>
+        <h3>No links, contacts, or QR codes</h3>
+        <p>Our videos never insert URLs, phone numbers, social handles, or QR codes — exactly what the October 2026 content policy prohibits in videos, descriptions, and comments.</p>
+      </div>
+      <div class="compliance-card">
+        <div class="kicker">Real product, real match</div>
+        <h3>What buyers see is what they get</h3>
+        <p>Image-to-video from your actual photo keeps shape, color, and label consistent, so the video matches the parcel and avoids "not as described" complaints.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="pricing">
   <div class="container">
     <h2 class="section-title">Simple pricing, cheaper than one UGC creator</h2>
-    <p class="section-sub">One freelance UGC video costs $80–150. ReelPilot gives you a whole batch for less than your daily coffee budget.</p>
+    <p class="section-sub">One freelance UGC video costs $80–150. One ReelPilot batch costs less — and every export ships with AI disclosure and claims that match your listing.</p>
     <div class="pricing">
       <div class="plan">
         <h3>Starter</h3>
@@ -283,8 +324,9 @@
         <ul>
           <li>30 videos per month</li>
           <li>5 ad templates</li>
-          <li>9:16 TikTok-ready format</li>
+          <li>9:16 TikTok Shop-ready format</li>
           <li>Auto captions &amp; hooks</li>
+          <li>AI disclosure note</li>
         </ul>
         <a href="#cta" class="btn btn-ghost" style="text-align:center;">Join waitlist</a>
       </div>
@@ -297,6 +339,7 @@
           <li>150 videos per month</li>
           <li>All templates + trending formats</li>
           <li>Batch generation (whole catalog)</li>
+          <li>Listing-grounded scripts</li>
           <li>Multi-language captions</li>
           <li>Priority rendering</li>
         </ul>
@@ -310,6 +353,7 @@
           <li>500 videos per month</li>
           <li>Custom brand kit &amp; fonts</li>
           <li>Team seats (3)</li>
+          <li>Compliance checklist export</li>
           <li>API access</li>
         </ul>
         <a href="#cta" class="btn btn-ghost" style="text-align:center;">Join waitlist</a>
@@ -332,7 +376,15 @@
     </details>
     <details class="faq-item">
       <summary>Can I use the videos on TikTok Shop and ads?</summary>
-      <p>Yes, you get full commercial usage rights for videos generated on paid plans — TikTok, Instagram Reels, YouTube Shorts, and paid ads.</p>
+      <p>Yes, you get full commercial usage rights for videos generated on paid plans — TikTok, Instagram Reels, YouTube Shorts, and paid ads. Each export also includes an AI-generated content note you can attach or keep on file.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Will AI-generated videos put my shop at risk?</summary>
+      <p>The suspension cases sellers talk about are tied to counterfeits, fake shipping, off-platform diversion, or claims the listing doesn't support — not to using an AI video tool. ReelPilot keeps every claim inside your detail page, attaches the AI disclosure, and never inserts links, contacts, or QR codes into the video.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What if TikTok Shop changes the rules again?</summary>
+      <p>We track Seller University policy updates and adjust templates and claim rules with them. When something material changes, we email every account so your next batch is already on the safe side.</p>
     </details>
     <details class="faq-item">
       <summary>What happens after I join the waitlist?</summary>
@@ -348,8 +400,8 @@
 <section id="cta" style="padding-top: 0;">
   <div class="container">
     <div class="final-cta">
-      <h2>Your competitors are already posting video daily</h2>
-      <p>Join the waitlist — be posting your first batch of TikTok ads this week, not next quarter.</p>
+      <h2>Post every day without tripping the new rules</h2>
+      <p>Join the waitlist — your first compliant batch lands this week, not next quarter.</p>
       <form class="email-form" data-waitlist style="margin-bottom: 0;">
         <input type="email" name="email" placeholder="you@yourstore.com" required aria-label="Email address">
         <button type="submit" class="btn btn-primary">Get early access</button>
